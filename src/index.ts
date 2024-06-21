@@ -6,8 +6,10 @@ const port = 3000;
 
  app.get('/api/leads', async (req, res) => {
   try {
-    const query = req.query.query as string;
-    const leads = await getLeads(query);
+      const queryString = req.url.split('?')[1] ? `${req.url.split('?')[1]}` : '';
+
+    const leads = await getLeads(queryString);
+
     res.json(leads);
 
   } catch (error) {
